@@ -38,14 +38,9 @@ def main():
 
     # Print key metrics
     if hasattr(results, 'box'):
-        print(f"\nBox Detection Metrics:")
+        print(f"\nDetection Metrics:")
         print(f"  mAP50: {results.box.map50:.4f}")
         print(f"  mAP50-95: {results.box.map:.4f}")
-    
-    if hasattr(results, 'obb'):
-        print(f"\nOriented Bounding Box Metrics:")
-        print(f"  mAP50: {results.obb.map50:.4f}")
-        print(f"  mAP50-95: {results.obb.map:.4f}")
 
     print(f"\nTest results saved to: runs/test/yolo11n-panther_v2-box-v2/")
 

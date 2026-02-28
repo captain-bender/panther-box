@@ -1,4 +1,4 @@
-# YOLOv11 OBB Custom Training Script - Testing angle learning capability
+# YOLOv11 Custom Training Script for Object Detection
 from ultralytics import YOLO
 import torch
 import os
@@ -19,11 +19,10 @@ def main():
     epochs = int(os.getenv('TRAIN_EPOCHS', '100'))
 
     # Train the model (pass device explicitly)
-    # OBB-specific configuration for better angle learning
     results = model.train(
         data=DATA_YAML,
         epochs=epochs,                      # Number of epochs (override with TRAIN_EPOCHS env var)
-        patience=20,                        # Increased patience for angle convergence
+        patience=20,                        # Early stopping patience
         imgsz=192,                         # Image size matching your data
         batch=8,                           # Increased batch size with A100 GPU
         project='runs/train',               # Output directory
@@ -31,7 +30,7 @@ def main():
         save=True,
         cache=True,                         # Cache images for faster training
         cos_lr=True,                        # Cosine learning rate scheduling
-        warmup_epochs=5,                    # Longer warmup for angle stability
+        warmup_epochs=5,                    # Warmup epochs for stable training
         workers=16,                         # Parallel data loading (A100 can handle it)
         seed=42,                            # Reproducible results
         amp=True,                           # Automatic Mixed Precision for memory efficiency
