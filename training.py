@@ -1,15 +1,15 @@
-# YOLOv8 OBB Custom Training Script - Testing angle learning capability
+# YOLOv11 OBB Custom Training Script - Testing angle learning capability
 from ultralytics import YOLO
 import torch
 import os
 
 # Path to your dataset config and pretrained model
-DATA_YAML = './dataset/version-1/data.yaml'
+DATA_YAML = './dataset/version-2/data.yaml'
 MODEL = 'yolo11n.pt'  
 
 def main():
     # Detect device (use CUDA if available)
-    device = [0,1] if torch.cuda.is_available() else 'cpu'
+    device = [0] if torch.cuda.is_available() else 'cpu'
     print(f'Using device: {device}')
 
     # Create YOLO model
@@ -24,7 +24,7 @@ def main():
         data=DATA_YAML,
         epochs=epochs,                      # Number of epochs (override with TRAIN_EPOCHS env var)
         patience=20,                        # Increased patience for angle convergence
-        imgsz=128,                         # Image size matching your data
+        imgsz=192,                         # Image size matching your data
         batch=8,                           # Increased batch size with A100 GPU
         project='runs/train',               # Output directory
         device=[0],
@@ -35,7 +35,7 @@ def main():
         workers=16,                         # Parallel data loading (A100 can handle it)
         seed=42,                            # Reproducible results
         amp=True,                           # Automatic Mixed Precision for memory efficiency
-        name='yolo11n-panther_v1-box-v1',  # Experiment name
+        name='yolo11n-panther_v2-box-v2',  # Experiment name
     )
 
     # Print training results
