@@ -1,0 +1,26 @@
+{
+  "timestamp": "2026-03-29T10:14:30.000000",
+  "model": "./runs/train/yolo11n-panther_v2-box-v2/weights/best.pt",
+  "dataset": "report-tests (corrected class IDs)",
+  "total_images": 40,
+  "image_size": 192,
+  "batch_size": 16,
+  "device": "CUDA:0",
+  "note": "Classes were reversed in original labels and have been corrected",
+  "performance_metrics": {
+    "mAP50": 0.995,
+    "mAP50-95": 0.845,
+    "precision": 0.997,
+    "recall": 1.0,
+    "map_per_class": {
+      "antenna": {
+        "mAP50": 0.995,
+        "mAP50-95": 0.866
+      },
+      "lidar": {
+        "mAP50": 0.995,
+        "mAP50-95": 0.824
+      }
+    }
+  }
+}
